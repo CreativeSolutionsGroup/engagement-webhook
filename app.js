@@ -9,7 +9,7 @@
 
 // express server
 const app = require('express')();
-const port = 3001;
+const port = 3000;
 
 // use body parser for routes
 const routes = require("./routes");
