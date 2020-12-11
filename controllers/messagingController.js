@@ -1,3 +1,11 @@
+// 
+// SmartEvents
+// Student Life Programs
+// Cedarville University
+//
+// purpose: controller providing responses for messages from Twilio
+// author(s): Jake Allinson
+//
 
 // connect to twilio
 // const twilio = require('../helpers/twilio');
@@ -11,13 +19,13 @@ exports.handleRequest = function (req, res) {
   const message = twiml.message();
   getEngagements(function(engagements) {
     if (engagements && engagements.length) {
-      // check if incoming message matches (with regex) any engagement keyword
+      // check if incoming message matches (using regex) any engagement keyword
       const matches = engagements.filter(eng => RegExp(eng.keyword).test(req.body.Body));
       if (matches && matches.length) {
         message.body(matches[0].message);
-        // if (engagements[eng].image_url) {
-        //   message.media(engagements[eng].image_url);
-        // }
+        if (engagements[eng].image_url) {
+          message.media(engagements[eng].image_url);
+        }
         // send engagee to smart events
         createNewEngagee(req.body.From, req.body.Body, matches[0]);
       } else {
@@ -32,7 +40,7 @@ exports.handleRequest = function (req, res) {
   });
 };
 
-const apiRoute = "http://localhost:3000"
+const apiRoute = "http://18.222.7.110:3000"
 
 function getEngagements(callback) {
   axios.get(`${apiRoute}/api/engagements`)
