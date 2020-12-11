@@ -7,8 +7,6 @@
 // author(s): Jake Allinson
 //
 
-// connect to twilio
-// const twilio = require('../helpers/twilio');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
 const axios = require('axios');
