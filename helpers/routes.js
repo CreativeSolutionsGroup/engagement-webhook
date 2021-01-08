@@ -11,7 +11,7 @@
 let router = require('express').Router();
 
 // controllers
-const messagingController = require('./controllers/messagingController');
+const messagingController = require('../controllers/messagingController');
 
 // EVENTS
 router.route('/messaging')
