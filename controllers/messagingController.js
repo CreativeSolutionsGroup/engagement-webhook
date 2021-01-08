@@ -21,8 +21,8 @@ exports.handleRequest = function (req, res) {
       const matches = engagements.filter(eng => RegExp(eng.keyword).test(req.body.Body));
       if (matches && matches.length) {
         message.body(matches[0].message);
-        if (engagements[eng].image_url) {
-          message.media(engagements[eng].image_url);
+        if (matches[0].image_url) {
+          message.media(matches[0].image_url);
         }
         // send engagee to smart events
         createNewEngagee(req.body.From, req.body.Body, matches[0]);
@@ -38,7 +38,7 @@ exports.handleRequest = function (req, res) {
   });
 };
 
-const apiRoute = "http://18.222.7.110:3000"
+const apiRoute = "http://18.222.7.110"
 
 function getEngagements(callback) {
   axios.get(`${apiRoute}/api/engagements`)

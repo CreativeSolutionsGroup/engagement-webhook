@@ -1,5 +1,10 @@
+// 
+// SmartEvents
+// Student Life Programs
+// Cedarville University
 //
-//
+// purpose: express server providing a webhook for messaging
+// author(s): Jake Allinson
 //
 
 const client = require('twilio')(

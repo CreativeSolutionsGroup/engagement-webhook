@@ -1,4 +1,5 @@
 /node_modules
 /secrets
+package-lock.json
 .env
 ecosystem.config.js
