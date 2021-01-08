@@ -12,7 +12,7 @@ const app = require('express')();
 const port = 3000;
 
 // use body parser for routes
-const routes = require("./routes");
+const routes = require("./helpers/routes");
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
