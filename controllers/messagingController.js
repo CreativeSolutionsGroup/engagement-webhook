@@ -18,7 +18,7 @@ exports.handleRequest = function (req, res) {
   getEngagements(function(engagements) {
     if (engagements && engagements.length) {
       // check if incoming message matches (using regex) any engagement keyword
-      const matches = engagements.filter(eng => RegExp(eng.keyword).test(req.body.Body));
+      const matches = engagements.filter(eng => RegExp(eng.keyword, "i").test(req.body.Body));
       if (matches && matches.length) {
         message.body(matches[0].message);
         if (matches[0].image_url) {
