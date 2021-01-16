@@ -44,7 +44,7 @@ exports.handleRequest = function (req, res) {
     res.writeHead(200, {'Content-Type': 'text/xml'});
     res.end(twiml.toString());
   })
-  .catch(() =>
+  .catch(() => {
     // send error response
     message.body("Oops. There has been an error, try again later!");
     res.writeHead(200, {'Content-Type': 'text/xml'});
