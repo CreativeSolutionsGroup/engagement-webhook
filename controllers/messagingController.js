@@ -17,24 +17,21 @@ exports.handleRequest = function (req, res) {
   getEngagements()
     .then(engagements => {
       if (engagements && engagements.length) {
-        // check if incoming message matches (using regex) any engagement keyword
+        // check if incoming message matches engagement keyword (using regex) and is live
         const matches = engagements.filter(eng => 
-          RegExp(eng.keyword, "i").test(req.body.Body)
+          RegExp(eng.keyword, "i").test(req.body.Body) && isLiveEngagement(eng)
         );
         if (matches && matches.length) {
+          // use the first found match
           let engagement = matches[0];
-          // finally check that the engagement is 'live'
-          if (isLiveEngagement(engagement)) {
-            message.body(engagement.message);
-            // check for valid image url
-            if (engagement.image_url && engagement.image_url != "") {
-              message.media(engagement.image_url);
-            }
-            // send engagee to smart events api
-            createNewEngagee(req.body.From, req.body.Body, engagement);
-          } else {
-            message.body("Oops. We're not ready for you quite yet. Check back later!");
+          message.body(engagement.message);
+          // check for valid image url
+          // TODO: check that image url doesn't return a 404
+          if (engagement.image_url && engagement.image_url != "") {
+            message.media(engagement.image_url);
           }
+          // send engagee to smart events API
+          createNewEngagee(req.body.From, req.body.Body, engagement);
         } else {
           message.body("Hmm. I don't recognize that. Try a different message!");
         }
