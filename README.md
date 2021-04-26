@@ -7,3 +7,5 @@
 
 # Engagement Webhook
 The Engagement Webhook, part of the SmartEvents project suite, is a backend server handling requests from the messaging service Twilio. Webhook receives POST requests with data from Twilio, sends that data to the API, then responds back to Twilio with what to text back.
+
+See the [docs](https://github.com/CreativeSolutionsGroup/engagement-webhook/tree/master/docs) directory to get started!
