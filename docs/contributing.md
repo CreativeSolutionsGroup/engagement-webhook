@@ -17,11 +17,13 @@ Running `git remote -v` should show the **origin** and **upstream** branches wit
  4. Create feature/bug branch off master
 
 `git checkout master`
+
 `git checkout -b <branch name>`
 
 5. Commit updates
 
 `git add .`
+
 `git commit -m "<commit message>"`
 
 6. Push updates
@@ -33,8 +35,13 @@ Running `git remote -v` should show the **origin** and **upstream** branches wit
 **NOTE:** You will want to periodically check for changes from the upstream branch. If changes have been made, you will want to update your remote and local master and rebase commits.
 
 `git remote update`
+
 `git push origin upstream`
+
 `git checkout master`
+
 `git pull -u origin master`
+
 `git checkout -`
+
 `git rebase master`
