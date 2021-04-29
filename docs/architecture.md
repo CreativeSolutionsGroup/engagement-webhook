@@ -1,3 +1,3 @@
 # Architecture
 
-<img width="559" alt="Screen Shot 2021-04-29 at 8 59 53 AM" src="https://user-images.githubusercontent.com/38381688/116554571-57cede00-a8c9-11eb-8bfc-a1523608a942.png">
+<img width="533" alt="Screen Shot 2021-04-29 at 9 01 09 AM" src="https://user-images.githubusercontent.com/38381688/116554668-76cd7000-a8c9-11eb-83bd-20b8660a9fb6.png">
