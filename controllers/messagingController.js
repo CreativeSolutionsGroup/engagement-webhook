@@ -51,7 +51,7 @@ exports.handleRequest = function (req, res) {
     })
 };
 
-const apiRoute = "http://18.222.7.110"
+const apiRoute = "https://api.cusmartevents.com"
 
 function getEngagements()
 {
