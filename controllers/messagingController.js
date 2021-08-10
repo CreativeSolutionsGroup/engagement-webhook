@@ -51,7 +51,7 @@ exports.handleRequest = function (req, res) {
     })
 };
 
-const apiRoute = "http://api.cusmartevents.com"
+const apiRoute = "https://api.cusmartevents.com"
 
 function getEngagements()
 {
