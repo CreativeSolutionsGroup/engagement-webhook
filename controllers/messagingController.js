@@ -24,7 +24,7 @@ exports.handleRequest = function (req, res) {
         if (matches && matches.length) {
           // use the first found match
           let engagement = matches[0];
-          let messageContent = "" + engagement.message;
+          let messageContent = engagement.message.replace(/\|/g, "\n");
           message.body(messageContent);
           // check for valid image url
           // TODO: check that image url doesn't return a 404
