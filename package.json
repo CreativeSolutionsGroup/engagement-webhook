@@ -16,5 +16,9 @@
     "nodemon": "^2.0.6",
     "pm2": "^4.5.0",
     "twilio": "^3.53.0"
+  },
+  "devDependencies": {
+    "serverless": "^2.57.0",
+    "serverless-offline": "^8.0.0"
   }
 }
