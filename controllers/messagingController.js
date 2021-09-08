@@ -29,7 +29,8 @@ exports.handleRequest = function (req, res) {
           // check for valid image url
           // TODO: check that image url doesn't return a 404
           if (engagement.image_url && engagement.image_url != "") {
-            message.media(engagement.image_url);
+            let images = engagement.image_url.split('|');
+            images.forEach((image) => message.media(image));
           }
           // send engagee to smart events API
           createNewEngagee(req.body.From, req.body.Body, engagement);
@@ -43,9 +44,9 @@ exports.handleRequest = function (req, res) {
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.end(twiml.toString());
     })
-    .catch(() => {
+    .catch((error) => {
       // send error response
-      console.log("error")
+      console.log("error: " + error)
       message.body("Oops. There has been an error, try again later!");
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.end(twiml.toString());
