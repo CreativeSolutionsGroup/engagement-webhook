@@ -1,4 +1,4 @@
-const axios = require('axios');
+import axios from "axios";
 
 async function getGoogleSheetJSON(sheetId){
     let rawData = await axios.get(`https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:json`);
@@ -29,7 +29,7 @@ async function checkUserList(email){
     return email !== undefined && list.includes(email);
 }
 
-exports.extractToken = function(req) {
+export const extractToken = function(req) {
     if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
         return req.headers.authorization.split(' ')[1];
     } else if (req.query && req.query.token) {
@@ -38,7 +38,7 @@ exports.extractToken = function(req) {
     return null;
 }
 
-exports.verifyToken = async function(token) {
+export const verifyToken = async function(token) {
     if(token === undefined || token === null)return {email: null, valid: false, error: 'Null Token'};
     try{
         const ticket = await axios.get('https://www.googleapis.com/oauth2/v3/tokeninfo?id_token='+token);
@@ -66,7 +66,7 @@ exports.verifyToken = async function(token) {
     }
 }
 
-exports.authUser = async function (token) {
+export const authUser = async function (token) {
     let verification = await this.verifyToken(token);
     if (verification === undefined || verification.valid === false) {
         return false;

@@ -6,16 +6,22 @@
 // purpose: controller providing automated giveaway messages
 // author(s): Alec Mathisen
 //
-require('dotenv').config();
-const client = require('twilio')(
+import client from 'twilio'
+import dotenv from "dotenv";
+import { extractToken, authUser } from "../helpers/auth.js";
+
+dotenv.config();
+
+client(
     process.env.TWILIO_ACCOUNT_SID,
     process.env.TWILIO_AUTH_TOKEN
 );
-const twilioNumber = process.env.TWILIO_NUMBER;
-const auth = require("../helpers/auth");
 
-exports.sendMessage = function (req, res) {
-  let userAuthToken = auth.extractToken(req);
+const twilioNumber = process.env.TWILIO_NUMBER;
+
+
+const sendMessage = (req, res) => {
+  let userAuthToken = extractToken(req);
   if (userAuthToken === null) {
     res.json({
       status: "error",
@@ -23,7 +29,7 @@ exports.sendMessage = function (req, res) {
     });
     return;
   }
-  auth.authUser(userAuthToken)
+  authUser(userAuthToken)
   .then(response => {
     if (response) {
         client.messages
@@ -53,7 +59,6 @@ exports.sendMessage = function (req, res) {
       message: error
     });
   });
-};
+}
 
-
-
+export default sendMessage;

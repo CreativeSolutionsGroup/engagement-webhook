@@ -8,14 +8,20 @@
 //
 
 // express server
-const app = require('express')();
+import Express from 'express';
+import checkSlots from "./helpers/slots.js";
+import routes from "./helpers/routes.js";
+import bodyParser from "body-parser";
+
 const port = 3000;
 
+const app = Express();
+
 // use body parser for routes
-const routes = require("./helpers/routes");
-const bodyParser = require('body-parser');
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({extended: true}));
+
+// Register the slot checker.
+checkSlots();
 
 // start the server
 app.listen(port, function() {

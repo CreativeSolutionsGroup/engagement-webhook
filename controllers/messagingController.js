@@ -7,10 +7,12 @@
 // author(s): Jake Allinson
 //
 
-const MessagingResponse = require('twilio').twiml.MessagingResponse;
-const axios = require('axios');
+import twil from 'twilio';
+import axios from "axios";
 
-exports.handleRequest = function (req, res) {
+const MessagingResponse = twil.twiml.MessagingResponse;
+
+export default function (req, res) {
   // new messaging object
   const twiml = new MessagingResponse();
   const message = twiml.message();

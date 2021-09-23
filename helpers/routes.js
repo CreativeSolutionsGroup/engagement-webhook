@@ -8,16 +8,18 @@
 //
 
 // initialize the express router
-let router = require('express').Router();
+import Router from "express";
+
+const router = Router.Router();
 
 // controllers
-const messagingController = require('../controllers/messagingController');
-const giveawayController = require('../controllers/giveawayController');
+import messagingController from '../controllers/messagingController.js';
+import giveawayController from '../controllers/giveawayController.js';
 
 // EVENTS
 router.route('/messaging')
-  .post(messagingController.handleRequest);
+  .post(messagingController);
 router.route('/giveaway')
-  .post(giveawayController.sendMessage);
+  .post(giveawayController);
 
-module.exports = router;
+export default router;
