@@ -4,9 +4,11 @@
 import cron from "cron";
 
 const checkSlots = async () => {
-    cron.job("*/30 * * * * *", () => {
+    const job = new cron.CronJob("*/30 * * * * *", () => {
         console.log("done");
-    })
+    });
+
+    job.start();
 }
 
 export default checkSlots
