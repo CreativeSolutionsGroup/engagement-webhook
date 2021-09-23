@@ -11,8 +11,7 @@ const client = require('twilio')(
     process.env.TWILIO_ACCOUNT_SID,
     process.env.TWILIO_AUTH_TOKEN
 );
-const twilioNumber = "+12058830991";
-const axios = require('axios');
+const twilioNumber = process.env.TWILIO_NUMBER;
 const auth = require("../helpers/auth");
 
 exports.sendMessage = function (req, res) {
