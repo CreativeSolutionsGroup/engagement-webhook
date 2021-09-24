@@ -9,7 +9,7 @@
 
 // express server
 import Express from 'express';
-import checkSlots from "./helpers/slots.js";
+import { registerSlotManager } from "./helpers/slots.js";
 import routes from "./helpers/routes.js";
 import bodyParser from "body-parser";
 
@@ -21,7 +21,7 @@ const app = Express();
 app.use(bodyParser.json({extended: true}));
 
 // Register the slot checker.
-checkSlots();
+registerSlotManager();
 
 // start the server
 app.listen(port, function() {
