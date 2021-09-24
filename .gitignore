@@ -4,5 +4,4 @@
 */.DS_Store
 package-lock.json
 .env
-.eslintrc.cjs
 ecosystem.config.js
