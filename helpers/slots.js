@@ -14,17 +14,18 @@ export const registerSlotManager = () => {
 }
 
 const scheduleSlots = async () => {
+    // get all the slots.
     const slotResponse = await Axios.get(`${process.env.API_URL}/api/slots`);
-    const dates = slotResponse.data.data;
+    const slots = slotResponse.data.data;
 
-    for (let date of dates) {
-        if (alreadyRegistered.includes(date._id)) {
-            continue;
-        }
+    const filteredSlots = slots.filter(s => !alreadyRegistered.includes(s._id));
 
-        alreadyRegistered.push(date._id);
+    for (let slot of filteredSlots) {
+        // Push the slot to the "unique id" register.
+        alreadyRegistered.push(slot._id);
 
-        const thirtyEarlier = new Date(Date.parse(date.hide_time) - 30 * MS_PER_MINUTE);
+        // Gets the date thirty minutes earlier, then schedules the task.
+        const thirtyEarlier = new Date(Date.parse(slot.hide_time) - 30 * MS_PER_MINUTE);
         if (thirtyEarlier.getMilliseconds() > Date.now()) {
             const job = new cron.CronJob(thirtyEarlier, () => {
                 console.log("done");
