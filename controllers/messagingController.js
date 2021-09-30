@@ -10,7 +10,11 @@
 import twil from 'twilio';
 import axios from "axios";
 
-import admin from "firebase-admin"
+import admin from "firebase-admin";
+
+admin.initializeApp({
+  credential: admin.credential.cert(require("../firebase-conf.json")),
+});
 
 const MessagingResponse = twil.twiml.MessagingResponse;
 
