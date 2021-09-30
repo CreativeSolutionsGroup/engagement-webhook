@@ -3,14 +3,24 @@
 
 import cron from "cron";
 import Axios from "axios";
+import AWS from "aws-sdk";
+
+const documentClient = new AWS.DynamoDB.DocumentClient()
 
 const MS_PER_MINUTE = 60000;
 
 var alreadyRegistered = [];
 
-export const registerSlotManager = () => {
+export const registerSlotManager = async () => {
     scheduleSlots();
     setInterval(scheduleSlots, 1 * MS_PER_MINUTE);
+}
+
+const getSlot = async (slot) => {
+    const ticketResponse = await Axios.get(`${process.env.API_URL}/api/slots/${slot._id}/tickets`);
+    const studentIds = ticketResponse.data.map(ticket => ticket.student_id);
+
+
 }
 
 const scheduleSlots = async () => {
@@ -21,6 +31,7 @@ const scheduleSlots = async () => {
     const filteredSlots = slots.filter(s => !alreadyRegistered.includes(s._id));
 
     for (let slot of filteredSlots) {
+        getSlot(slot);
         // Push the slot to the "unique id" register.
         alreadyRegistered.push(slot._id);
 
@@ -29,6 +40,7 @@ const scheduleSlots = async () => {
         if (thirtyEarlier.getMilliseconds() > Date.now()) {
             const job = new cron.CronJob(thirtyEarlier, () => {
                 console.log("done");
+                getSlot(slot);
             });
             job.start();
         }

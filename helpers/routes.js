@@ -13,7 +13,7 @@ import Router from "express";
 const router = Router.Router();
 
 // controllers
-import messagingController from '../controllers/messagingController.js';
+import messagingController, {testMessage} from '../controllers/messagingController.js';
 import giveawayController from '../controllers/giveawayController.js';
 
 // EVENTS
@@ -21,5 +21,7 @@ router.route('/messaging')
   .post(messagingController);
 router.route('/giveaway')
   .post(giveawayController);
+router.route("/testMessage")
+  .post(testMessage)
 
 export default router;

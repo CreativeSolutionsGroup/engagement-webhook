@@ -10,6 +10,8 @@
 import twil from 'twilio';
 import axios from "axios";
 
+import admin from "firebase-admin"
+
 const MessagingResponse = twil.twiml.MessagingResponse;
 
 export default function (req, res) {
@@ -85,4 +87,23 @@ function isLiveEngagement(engagement)
 {
   let time = new Date();
   return new Date(engagement.start_time) <= time && time <= new Date(engagement.end_time)
+}
+
+export async function testMessage(request, response) {
+  const body = request.body;
+
+  const messages = body.tokens.map((token) => {
+    return {
+      data: {
+        myData: "Hello world!",
+      },
+      token: token,
+    };
+  });
+
+  await admin.messaging().sendAll(messages);
+
+  response.json({
+    message: "Hello world!",
+  });
 }
