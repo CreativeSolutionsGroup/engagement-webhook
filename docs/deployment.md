@@ -33,3 +33,6 @@ location / {
 - Restart the nginx reverse proxy `sudo systemctl restart nginx`
 - Check status `sudo systemctl status nginx`
 
+##DNS SSL Certificate Update##
+`sudo certbot certonly --manual --preferred-challenges dns -d engagements.cusmartevents.com`
+
